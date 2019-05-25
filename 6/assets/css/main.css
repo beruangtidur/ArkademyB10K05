@@ -1,0 +1,12 @@
+html,body{ font-family: 'Kodchasan', sans-serif; color: #4E4E4E; }
+.divide{ border-bottom:1px solid lightgrey }
+.listsPrg > .row{ border-bottom:1px dashed #4E4E4E; }
+.null{font-size: 6rem;}
+
+/* potrait smartphone media breakpoints */
+@media (max-width: 575.98px) {
+    html,body{font-size:90%;}
+    .newPrg-wrapper{ text-align: center; margin-top: 10px; }
+    .newPrg-wrapper > div:nth-child(2){ margin-top: 15px; }
+    .title,.null{text-align: center;}
+}

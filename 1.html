@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Return JSON</title>
+</head>
+
+<body>
+
+    <script>
+        let data
+        let biodata = function (name, address, hobbies = [], is_married, school = {}, skills = []) {
+            this.name = name
+            this.address = address
+            this.hobbies = hobbies
+            this.is_married = is_married
+            this.school = school
+            this.skills = skills
+        }
+        // object construct
+
+        data = new biodata(
+            "Naufal Hafizhan",
+            "Perum Patra Raya Cluster Rosewood Blok H6/2, Cerme , Kab.Gresik",
+            ["futsal", "membaca", "Koding", "musik"],
+            false,
+            { highSchool: "SMKN 1 Cerme", univesity: "" },
+            [
+                { name: "Front End Development (HTML,CSS,JS)", score: 80 },
+                { name: "Back end Development (PHP native, MYSQL)", score: 70 },
+                { name: "Jquery", score: 80 },
+                { name: "Bash Scripting", score: 60},
+            ]
+        )
+        // new object
+
+        document.body.textContent = JSON.stringify(data) // ubah content jadi data yang isinya json
+    </script>
+</body>
+
+</html>

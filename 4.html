@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Cetak Gambar</title>
+</head>
+
+<body>
+    <div id="bendera"></div>
+    <script>
+
+        function cetak_gambar(len) {
+            let img = ""
+            if (len % 2 !== 0) {
+                for (let baris = 0; baris < len; baris++) { // row
+                    for (let kol = 0; kol < len; kol++) { // column
+    
+                        if (kol == baris) {
+                            img += "x "
+                        } else if (kol == len - 1 - baris) {
+                            img += "x "
+                        } else {
+                            img += "= "
+                        }
+                        
+                    }// end column
+                    img += "\n"
+                } // end row
+            }
+
+            return img
+        }
+
+        // console.log(cetak_gambar(5))
+        // console.log(cetak_gambar(10))
+        // console.log(cetak_gambar(9))
+
+        function persegi(x,y) {
+            let str = ""
+            for (let i = 0; i < x; i++) {
+                for (let j = 0; j < y; j++) {
+                    str += "*"                    
+                }
+                str += "\n"
+            }
+            return str
+        }
+
+        console.log(persegi(5,10))
+
+    </script>
+</body>
+
+</html>

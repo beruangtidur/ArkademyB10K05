@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MinMax Data</title>
+</head>
+
+<body>
+
+
+    <script>
+        let data = ['a', 'c', 'y', 'e', 'z']
+        let data2 = ['c', 'e', 'r', 's']
+
+        function minMax(data = []) {
+            let newData = []
+
+            data = data.sort() // sortir data
+
+            newData = [data[0],data[data.length-1]] //ambil data paling awal dan akhir
+
+            return newData;
+        }
+        
+        console.log(minMax(data))
+        console.log(minMax(data2))
+    </script>
+</body>
+
+</html>
