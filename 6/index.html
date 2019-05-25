@@ -64,8 +64,7 @@
             // add programmer ==================
 
             else if (e.target.classList.contains("deletePrg")) {
-                let id = e.target.id
-                id = id.substring(6)
+                id = e.target.getAttribute('data-id')
                 
                 $(".modal-dialog").html(`<div class="modal-content">
                     <div class="modal-header">
@@ -76,20 +75,20 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-                        <button type="button" class="btn btn-danger modalDelete" id="${id}">Hapus</button>
+                        <button type="button" class="btn btn-danger modalDelete" data-id="${id}">Hapus</button>
                     </div>
                 </div>`)
                 $('.modal').modal("show");  
                 $('.modalDelete').click(function (e) {
                     e.preventDefault()
-                    deletePrg(e.target.id)
+                    deletePrg(e.target.getAttribute('data-id'))
                 })
             }
             // delete programmer ==================
 
             else if (e.target.classList.contains("addSkills")) {
-                let id      = e.target.id.substring(6),
-                    skills  = $("#newSkills"+id).val().trim()
+                let id      = e.target.getAttribute('data-id'),
+                    skills  = e.target.parentElement.previousElementSibling.value
 
                 if (skills !== "") {
                     addSkills(skills, id)

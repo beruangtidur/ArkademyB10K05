@@ -5,65 +5,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Random String</title>
+    <title>Between Days Func</title>
 </head>
 
 <body>
-    <div class="random">
-        <ul></ul>
-    </div>
     <script>
+        console.log(betweenDays("2019-01-15", "2019-01-20"))
+        console.log(betweenDays("2019-05-25", "2019-05-30"))
 
-        let strList = "abcdefghijklmnopqrstuvwxyz1234567890",
-            strMaxChar = 32,
-            strArr = []
-        
-        function cetak(num) {
-            let arr = [],
-                str
-            
-            for (let j = 0; j < num; j++) {
-                str = ""
 
-                for (let i = 0; i < strMaxChar; i++) {
-                    str += strList[Math.floor(Math.random() * strList.length)];
-                }// generate random str
+            function betweenDays(date1,date2) {
+                let newDate1 = new Date(date1), // date1
+                    newDate2 = new Date(date2), // date2
+                    count =  newDate2.getDate() - newDate1.getDate(),
+                    nextTimestamp =  newDate1.getTime() + (1000 * 60 * 60 * 24), // next date in milisecond
+                    between = []
 
-                // uji str sebelum di push ke array
-                if ( is_unique(str, arr) ){
-                    arr.push(str)
-                }else{
-                    j--; //ulangi generate
+                function fixed(n) {
+                    return (n < 10) ? "0" +n : n
+                }
+                
+                for (let i = 1; i < count; i++) {
+                    let nextDate = new Date(nextTimestamp),
+                        year = fixed(nextDate.getFullYear()),
+                        month = fixed(nextDate.getMonth() + 1),
+                        date = fixed(nextDate.getDate()),
+                        yyyymmdd = year + "-" + month + "-" + date // make string date output
+
+                    between.push(yyyymmdd)
+
+                    nextTimestamp = nextTimestamp + (1000 * 60 * 60 * 24) // increment to next date
                 }
 
+                return between
             }
-            strArr = arr
-            return strArr
-        } // end function cetak
-
-        function is_unique(str, arr = []){
-            let pass = true
-
-            if (arr.length > 0) {
-                    for (let k = 0; k < arr.length; k++) { // uji str dengan isi seluruh array
-                        if (str !== arr[k]) {
-                            pass = true
-                        }else{
-                            pass = false
-                        }
-                    } 
-            }
-
-            return pass
-        }
-
-        console.log(cetak(5))
-        console.log(cetak(10))
-
-        strArr.forEach(function (v) {
-            let li = "<li>" + v + "</li>"
-            document.querySelectorAll(".random ul")[0].innerHTML += li
-        })
     </script>
 </body>
 

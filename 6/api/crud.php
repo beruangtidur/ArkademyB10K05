@@ -3,29 +3,37 @@ Header('Content-type: application/json');
 
 require_once('../env.php');
 
-$conn = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
+$conn = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME) or die("Can't connect to database");
 
 
 switch ($_SERVER['REQUEST_METHOD']) {
 
     case 'GET':
         $data = [];
-        $q = "SELECT users.*, skills.name AS skills FROM users LEFT JOIN skills ON users.id = skills.user_id";
-        if ($result = $conn->query($q)) {
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_object()) {
-                    if (isset($data[$row->id])) {
-                        array_push($data[$row->id]['skills'], $row->skills);
-                    } else {
-                        $data[$row->id] = ['name' => $row->name, 'skills' => [$row->skills]];
-                    }
+        $q = "SELECT users.name, GROUP_CONCAT(skills.name) AS skills FROM users LEFT JOIN skills ON users.id = skills.user_id GROUP BY (users.name);";
+        $q .= "SELECT * FROM users ORDER BY name";
+
+        if ($conn->multi_query($q) ){
+            $data = [];
+            do {
+                /* store first result set */
+                if ($result = $conn->store_result()) {
+                    $data[] = $result->fetch_all(MYSQLI_ASSOC); // fetch all data
+            
+                    $result->free();
                 }
-            } else {
-                $data = null;
-            }
-            echo json_encode($data);
+                /* print divider */
+                if ($conn->more_results()) {
+
+                }
+            } while ($conn->next_result());
+            
+            echo json_encode(["data" => $data]);
+        }else{
+            echo json_encode(false);
         }
-        // return;
+ 
+        return;
         break;// FETCH DATA PRG==============
 
     case 'POST':

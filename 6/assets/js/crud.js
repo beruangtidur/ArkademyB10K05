@@ -1,32 +1,31 @@
 function dataTemplate(data) {
     let row = "";
     const listsPrg = $('.listsPrg')
-
-    if (data !== null) {
-
-        for (const key in data) {
-            row +=
-                `
-            <div class="row mb-4">
-                <div class="col-12 col-md-6">
-                    <div class="prgName"><h4 style="font-weight:bold">${data[key].name}</h4></div>
-                    <div class="divide"></div>
-                    <div class="prgSkill py-2"><span>${(data[key].skills[0] !== null) ? data[key].skills.join(", ") : ""}</span></div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <form action="javascript:void(0)">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Tambah Skills" id=newSkills${key} "Tambah Skill...">
-                            <div class="input-group-append">
-                                <input type="submit" class="btn btn-outline-primary addSkills" id="skills${key}" value="Tambah">
-                                <button class="btn btn-outline-danger deletePrg" type="button" id="delete${key}">Hapus</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+    
+    if (data[1].length !== 0) {
+            for (let index = 0; index < data[1].length; index++) {
+                row +=
                     `
-        }
+                <div class="row mb-4">
+                    <div class="col-12 col-md-6">
+                        <div class="prgName"><h4 style="font-weight:bold">${data[0][index].name}</h4></div>
+                        <div class="divide"></div>
+                        <div class="prgSkill py-2"><span>${ (data[0][index].skills) ? data[0][index].skills : "" }</span></div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <form action="javascript:void(0)">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Tambah Skills...">
+                                <div class="input-group-append">
+                                    <input type="submit" class="btn btn-outline-primary addSkills" data-id="${data[1][index].id}"value="Tambah">
+                                    <button class="btn btn-outline-danger deletePrg" type="button" data-id="${data[1][index].id}">Hapus</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                        `
+            }
     }else{
         row = "<h1 class='null'>(>_<)</h1>"
     }
@@ -38,8 +37,8 @@ function getData() {
     $.ajax({
         url: 'api/crud.php',
         method: 'GET'
-    }).done(data => {
-        dataTemplate(data)
+    }).done(res => {
+        dataTemplate(res.data)
     })
 }
 // load data=======================
@@ -76,7 +75,7 @@ function addSkills(skills, id) {
         method: 'PATCH'
     }).done(data => {
         if (data) {
-            $('#newSkills').val("")
+            $('.addSkills').val("")
             getData()
         }
     })

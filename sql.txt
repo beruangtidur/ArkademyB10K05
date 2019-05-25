@@ -1,0 +1,1 @@
+SELECT users.name, COUNT(skills.name) AS jumlah_skill FROM users LEFT JOIN skills ON users.id = skills.user_id GROUP BY (users.name); 

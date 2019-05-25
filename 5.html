@@ -5,28 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>MinMax Data</title>
+    <title>Ganti Kata</title>
 </head>
 
 <body>
 
 
     <script>
-        let data = ['a', 'c', 'y', 'e', 'z']
-        let data2 = ['c', 'e', 'r', 's']
+        console.log(ganti_kata("sega", "a", "o"))
+        console.log(ganti_kata("sekolah", "o", "a"))
+        console.log(ganti_kata("kolam", "l", "d"))
 
-        function minMax(data = []) {
-            let newData = []
+        function ganti_kata(string, char1, char2){
+            let str = ""
 
-            data = data.sort() // sortir data
+            for (let i = 0; i < string.length; i++){
+                if (string[i] == char1){
+                    str += char2
+                }else{
+                    str += string[i]
+                }
+            }
 
-            newData = [data[0],data[data.length-1]] //ambil data paling awal dan akhir
-
-            return newData;
+            return str
         }
-        
-        console.log(minMax(data))
-        console.log(minMax(data2))
     </script>
 </body>
 

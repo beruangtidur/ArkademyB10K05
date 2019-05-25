@@ -17,13 +17,15 @@
             if (len % 2 !== 0) {
                 for (let baris = 0; baris < len; baris++) { // row
                     for (let kol = 0; kol < len; kol++) { // column
-    
-                        if (kol == baris) {
-                            img += "x "
-                        } else if (kol == len - 1 - baris) {
-                            img += "x "
-                        } else {
-                            img += "= "
+
+                        if (baris == 0 || baris == len-1){
+                            img +=  "x "
+                        }else{
+                            if (kol == Math.floor(len/2) ){
+                                img += "x "
+                            }else {
+                                img += "= "
+                            }
                         }
                         
                     }// end column
@@ -34,22 +36,9 @@
             return img
         }
 
-        // console.log(cetak_gambar(5))
-        // console.log(cetak_gambar(10))
-        // console.log(cetak_gambar(9))
-
-        function persegi(x,y) {
-            let str = ""
-            for (let i = 0; i < x; i++) {
-                for (let j = 0; j < y; j++) {
-                    str += "*"                    
-                }
-                str += "\n"
-            }
-            return str
-        }
-
-        console.log(persegi(5,10))
+        console.log(cetak_gambar(5))
+        console.log(cetak_gambar(10))
+        console.log(cetak_gambar(9))
 
     </script>
 </body>

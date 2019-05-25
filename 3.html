@@ -4,32 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Count Char</title>
+    <title>Count Vowels</title>
 </head>
 <body>
     
     <script>
-        function myCountChar(str, char){
-            let count  = 0
+        console.log("jumlah = " + count_vowels("naufal"))
 
-            for (let i = 0; i < str.length; i++) {
-                if (char == str[i]) {
-                    count++
+        function count_vowels(string){
+            const vowels = "aiueo"
+            let count = 0
+
+            for (let i = 0; i < string.length; i++){
+                for (let j = 0; j < vowels.length; j++){
+                    if (string[i] == vowels[j]){
+                       count++
+                    }
                 }
+                // if (string[i] == "a" || string[i] = "i" || string[i] == "u" || string[i] == "e" || string[i] == "o"){
+                // } // =============== alternative
             }
             return count
-        }// simple count char
-
-        //testing
-        const c1 = "a",
-              c2 = "o",
-              c3 = "x",
-              str= "bootcamp"
-
-        console.log("dari kata '" +str+ "' " + c1+ " jumlahnya ada " +myCountChar(str, c1))
-        console.log("dari kata '" +str+ "' " + c2+ " jumlahnya ada " +myCountChar(str, c2))
-        console.log("dari kata '" +str+ "' " + c3+ " jumlahnya ada " +myCountChar(str, c3))
-        //end testing
+        }
     </script>
 </body>
 </html>
