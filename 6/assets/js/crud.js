@@ -1,31 +1,36 @@
 function dataTemplate(data) {
-    let row = "";
     const listsPrg = $('.listsPrg')
+    const users = data 
+    let row = ""
     
-    if (data[1].length !== 0) {
-            for (let index = 0; index < data[1].length; index++) {
+    if (users.length > 0) {
+        for (const index in users) {
+            if (users.hasOwnProperty(index)) {
+                const user = users[index]
+                
                 row +=
-                    `
+                `
                 <div class="row mb-4">
                     <div class="col-12 col-md-6">
-                        <div class="prgName"><h4 style="font-weight:bold">${data[0][index].name}</h4></div>
+                        <div class="prgName"><h4 style="font-weight:bold">${user.name}</h4></div>
                         <div class="divide"></div>
-                        <div class="prgSkill py-2"><span>${ (data[0][index].skills) ? data[0][index].skills : "" }</span></div>
+                        <div class="prgSkill py-2"><span>${ (user.skills !== null) ? user.skills : "" }</span></div>
                     </div>
                     <div class="col-12 col-md-6">
                         <form action="javascript:void(0)">
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" placeholder="Tambah Skills...">
                                 <div class="input-group-append">
-                                    <input type="submit" class="btn btn-outline-primary addSkills" data-id="${data[1][index].id}"value="Tambah">
-                                    <button class="btn btn-outline-danger deletePrg" type="button" data-id="${data[1][index].id}">Hapus</button>
-                                </div>
+                                    <input type="submit" class="btn btn-outline-primary addSkills" data-id="${user.id}"value="Tambah">
+                                    <button class="btn btn-outline-danger deletePrg" type="button" data-id="${user.id}">Hapus</button>
+                            </div>
                             </div>
                         </form>
                     </div>
                 </div>
-                        `
+                `
             }
+        }
     }else{
         row = "<h1 class='null'>(>_<)</h1>"
     }
@@ -38,7 +43,7 @@ function getData() {
         url: 'api/crud.php',
         method: 'GET'
     }).done(res => {
-        dataTemplate(res.data)
+        dataTemplate(res)
     })
 }
 // load data=======================

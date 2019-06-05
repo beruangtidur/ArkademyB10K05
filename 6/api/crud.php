@@ -10,30 +10,16 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
     case 'GET':
         $data = [];
-        $q = "SELECT users.name, GROUP_CONCAT(skills.name) AS skills FROM users LEFT JOIN skills ON users.id = skills.user_id GROUP BY (users.name);";
-        $q .= "SELECT * FROM users ORDER BY name";
+        $q = "SELECT users.id,users.name, GROUP_CONCAT(skills.name) AS skills FROM users LEFT JOIN skills ON users.id=skills.user_id GROUP BY users.name,users.id ORDER BY users.id";
+        if ($result = $conn->query($q)) {
+            $data = $result->fetch_all(MYSQLI_ASSOC);
 
-        if ($conn->multi_query($q) ){
-            $data = [];
-            do {
-                /* store first result set */
-                if ($result = $conn->store_result()) {
-                    $data[] = $result->fetch_all(MYSQLI_ASSOC); // fetch all data
-            
-                    $result->free();
-                }
-                /* print divider */
-                if ($conn->more_results()) {
-
-                }
-            } while ($conn->next_result());
-            
-            echo json_encode(["data" => $data]);
+            echo json_encode($data);
         }else{
             echo json_encode(false);
         }
  
-        return;
+        return false;
         break;// FETCH DATA PRG==============
 
     case 'POST':
